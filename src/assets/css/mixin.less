@@ -1,0 +1,283 @@
+@import './variable';
+
+html,
+body {
+    pointer-events: auto;
+    width: 100%;
+    height: 100%;
+}
+
+#app {
+    width: 100%;
+    min-height: 100%;
+    overflow-y: scroll;
+}
+
+.fs(@val) {
+    font-size: unit(@val, px);
+}
+/* 清除浮动 */
+.ks-clear:after,
+.clear:after {
+    content: '\20';
+    display: block;
+    height: 0;
+    clear: both;
+}
+
+.ks-clear,
+.clear {
+    *zoom: 1;
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+.tc {
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+}
+
+.bg(@val) {
+    background-color: @val;
+}
+
+.bgfff {
+    background: #fff;
+}
+
+.plr10 {
+    padding: 0 10px;
+}
+
+.borbot {
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.mb10 {
+    margin-bottom: 10px;
+}
+
+.borbot {
+    border-bottom: 1px solid #d8d8d8;
+}
+
+.bglinear(@side-or-corner, @startColor, @endColor) {
+    background: -webkit-linear-gradient(@side-or-corner, @startColor, @endColor); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(@side-or-corner, @startColor, @endColor); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(@side-or-corner, @startColor, @endColor); /* Firefox 3.6 - 15 */
+    background: linear-gradient(@side-or-corner, @startColor, @endColor); /* 标准的语法 */
+}
+
+::-webkit-input-placeholder {
+    color: #999;
+}
+
+input[type="text"],
+input[type="password"] {
+    -webkit-appearance: none;
+    appearance: none;
+    outline: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    border-radius: 0;
+}
+
+textarea {
+    -webkit-appearance: none
+}
+
+.flex(@pos) when (@pos='center') {
+    -webkit-box-flex: 1;      /* OLD - iOS 6-, Safari 3.1-6 */
+    -moz-box-flex: 1;         /* OLD - Firefox 19- */
+    // width: 20%;               /* For old syntax, otherwise collapses. */
+    -webkit-flex: 1;          /* Chrome */
+    -ms-flex: 1;              /* IE 10 */
+    flex: 1;                  /* NEW, Spec - Opera 12.1, Firefox 20+ */
+    display: box;             /* OLD - Android 4.4- */
+    display: -webkit-box;     /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;        /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;     /* TWEENER - IE 10 */
+    display: -webkit-flex;    /* NEW - Chrome */
+    display: flex;            /* NEW, Spec - Opera 12.1, Firefox 20+ */
+    /* 09版 */
+    -webkit-box-orient: horizontal;
+    /* 12版 */
+    -webkit-flex-direction: row;
+    -moz-flex-direction: row;
+    -ms-flex-direction: row;
+    -o-flex-direction: row;
+    flex-direction: row;
+
+    /* 09版 */
+    -webkit-box-pack: center;
+    /* 12版 */
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    -ms-justify-content: center;
+    -o-justify-content: center;
+    justify-content: center;
+}
+
+.flex(@pos) when (@pos='left') {
+    -webkit-box-flex: 1;      /* OLD - iOS 6-, Safari 3.1-6 */
+    -moz-box-flex: 1;         /* OLD - Firefox 19- */
+    // width: 20%;               /* For old syntax, otherwise collapses. */
+    -webkit-flex: 1;          /* Chrome */
+    -ms-flex: 1;              /* IE 10 */
+    flex: 1;                  /* NEW, Spec - Opera 12.1, Firefox 20+ */
+    display: box;             /* OLD - Android 4.4- */
+    display: -webkit-box;     /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;        /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;     /* TWEENER - IE 10 */
+    display: -webkit-flex;    /* NEW - Chrome */
+    display: flex;            /* NEW, Spec - Opera 12.1, Firefox 20+ */
+    /* 09版 */
+    -webkit-box-orient: horizontal;
+    /* 12版 */
+    -webkit-flex-direction: row;
+    -moz-flex-direction: row;
+    -ms-flex-direction: row;
+    -o-flex-direction: row;
+    flex-direction: row;
+
+    /* 09版 */
+    -webkit-box-pack: flex-start;
+    /* 12版 */
+    -webkit-justify-content: flex-start;
+    -moz-justify-content: flex-start;
+    -ms-justify-content: flex-start;
+    -o-justify-content: flex-start;
+    justify-content: flex-start;
+}
+
+.flex(@pos) when (@pos='right') {
+    -webkit-box-flex: 1;      /* OLD - iOS 6-, Safari 3.1-6 */
+    -moz-box-flex: 1;         /* OLD - Firefox 19- */
+    // width: 20%;               /* For old syntax, otherwise collapses. */
+    -webkit-flex: 1;          /* Chrome */
+    -ms-flex: 1;              /* IE 10 */
+    flex: 1;                  /* NEW, Spec - Opera 12.1, Firefox 20+ */
+    display: box;             /* OLD - Android 4.4- */
+    display: -webkit-box;     /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;        /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;     /* TWEENER - IE 10 */
+    display: -webkit-flex;    /* NEW - Chrome */
+    display: flex;            /* NEW, Spec - Opera 12.1, Firefox 20+ */
+    /* 09版 */
+    -webkit-box-orient: horizontal;
+    /* 12版 */
+    -webkit-flex-direction: row;
+    -moz-flex-direction: row;
+    -ms-flex-direction: row;
+    -o-flex-direction: row;
+    flex-direction: row;
+
+    /* 09版 */
+    -webkit-box-pack: flex-end;
+    /* 12版 */
+    -webkit-justify-content: flex-end;
+    -moz-justify-content: flex-end;
+    -ms-justify-content: flex-end;
+    -o-justify-content: flex-end;
+    justify-content: flex-end;
+}
+
+.flex(@pos) when (@pos='all') {
+    -webkit-box-flex: 1;      /* OLD - iOS 6-, Safari 3.1-6 */
+    -moz-box-flex: 1;         /* OLD - Firefox 19- */
+    // width: 20%;               /* For old syntax, otherwise collapses. */
+    -webkit-flex: 1;          /* Chrome */
+    -ms-flex: 1;              /* IE 10 */
+    flex: 1;                  /* NEW, Spec - Opera 12.1, Firefox 20+ */
+    display: box;             /* OLD - Android 4.4- */
+    display: -webkit-box;     /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;        /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;     /* TWEENER - IE 10 */
+    display: -webkit-flex;    /* NEW - Chrome */
+    display: flex;            /* NEW, Spec - Opera 12.1, Firefox 20+ */
+    /* 09版 */
+    -webkit-box-orient: horizontal;
+    /* 12版 */
+    -webkit-flex-direction: row;
+    -moz-flex-direction: row;
+    -ms-flex-direction: row;
+    -o-flex-direction: row;
+    flex-direction: row;
+
+    /* 09版 */
+    -webkit-box-pack: space-between;
+    /* 12版 */
+    -webkit-justify-content: space-between;
+    -moz-justify-content: space-between;
+    -ms-justify-content: space-between;
+    -o-justify-content: space-between;
+    justify-content: space-between;
+}
+
+.flex(@pos) when (@pos='around') {
+    -webkit-box-flex: 1;      /* OLD - iOS 6-, Safari 3.1-6 */
+    -moz-box-flex: 1;         /* OLD - Firefox 19- */
+    // width: 20%;               /* For old syntax, otherwise collapses. */
+    -webkit-flex: 1;          /* Chrome */
+    -ms-flex: 1;              /* IE 10 */
+    flex: 1;                  /* NEW, Spec - Opera 12.1, Firefox 20+ */
+    display: box;             /* OLD - Android 4.4- */
+    display: -webkit-box;     /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;        /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;     /* TWEENER - IE 10 */
+    display: -webkit-flex;    /* NEW - Chrome */
+    display: flex;            /* NEW, Spec - Opera 12.1, Firefox 20+ */
+    /* 09版 */
+    -webkit-box-orient: horizontal;
+    /* 12版 */
+    -webkit-flex-direction: row;
+    -moz-flex-direction: row;
+    -ms-flex-direction: row;
+    -o-flex-direction: row;
+    flex-direction: row;
+
+    /* 09版 */
+    -webkit-box-pack: space-around;
+    /* 12版 */
+    -webkit-justify-content: space-around;
+    -moz-justify-content: space-around;
+    -ms-justify-content: space-around;
+    -o-justify-content: space-around;
+    justify-content: space-around;
+}
+
+.align(@pos) when(@pos='center') {
+    align-items: center;
+}
+
+.align(@pos) when(@pos='top') {
+    align-items: flex-start;
+}
+
+.align(@pos) when(@pos='end') {
+    align-items: flex-end;
+}
+
+.align(@pos) when(@pos='base') {
+    align-items: baseline;
+}
+
+.align(@pos) when(@pos='stretch') {
+    align-items: stretch;
+}
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: '';
+}
