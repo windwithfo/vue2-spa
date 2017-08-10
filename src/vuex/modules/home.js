@@ -1,7 +1,7 @@
 const state = {
-    msg: ''
+  msg: ''
 };
 
 export default {
-    state
+  state
 };

@@ -25,33 +25,33 @@ const app = express();
 const compiler = webpack(webpackConfig);
 
 const devMiddleware = DevMiddleware(compiler, {
-    publicPath: webpackConfig.output.publicPath,
-    stats: {
-        colors: true,
-        chunks: false
-    }
+  publicPath: webpackConfig.output.publicPath,
+  stats: {
+    colors: true,
+    chunks: false
+  }
 });
 
 let hotMiddleware = HotMiddleware(compiler);
 // force page reload when html-webpack-plugin template changes
 compiler.plugin('compilation', function (compilation) {
-    compilation.plugin('html-webpack-plugin-after-emit', function (data, cb) {
-        hotMiddleware.publish({
-            action: 'reload'
-        });
-        cb();
+  compilation.plugin('html-webpack-plugin-after-emit', function (data, cb) {
+    hotMiddleware.publish({
+      action: 'reload'
     });
+    cb();
+  });
 });
 
 // proxy api requests
 Object.keys(proxyTable).forEach(function (context) {
-    let options = proxyTable[context];
-    if (typeof options === 'string') {
-        options = {
-            target: options
-        };
-    }
-    app.use(proxyMiddleware(context, options));
+  let options = proxyTable[context];
+  if (typeof options === 'string') {
+    options = {
+      target: options
+    };
+  }
+  app.use(proxyMiddleware(context, options));
 });
 
 // handle fallback for HTML5 history API
@@ -69,21 +69,21 @@ const staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.asset
 app.use(staticPath, express.static('./static'));
 
 app.get('/mock/*', function (req, res) {
-    let tmp = req.url.split('?');
-    let mockPath = '/static' + tmp[0] + '.json' + (tmp[1] ? '?' + tmp[1] : '');
-    console.log('get mock on path:' + mockPath);
-    res.redirect(mockPath);
+  let tmp = req.url.split('?');
+  let mockPath = '/static' + tmp[0] + '.json' + (tmp[1] ? '?' + tmp[1] : '');
+  console.log('get mock on path:' + mockPath);
+  res.redirect(mockPath);
 });
 
 app.listen(port, function (err) {
-    if (err) {
-        console.log(err);
-        return;
-    }
-    let uri = 'http://localhost:' + port;
-    console.log('Listening at ' + uri + '\n');
-    // when env is testing, don't need open it
-    if (process.env.NODE_ENV !== 'testing') {
-        //opn(uri);
-    }
+  if (err) {
+    console.log(err);
+    return;
+  }
+  let uri = 'http://localhost:' + port;
+  console.log('Listening at ' + uri + '\n');
+  // when env is testing, don't need open it
+  if (process.env.NODE_ENV !== 'testing') {
+    //opn(uri);
+  }
 });

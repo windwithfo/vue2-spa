@@ -12,62 +12,62 @@
 
 // add hot-reload related code to entry chunks
 Object.keys(config.entry).forEach(function (name) {
-    config.entry[name] = ['./build/dev-client'].concat(config.entry[name]);
+  config.entry[name] = ['./build/dev-client'].concat(config.entry[name]);
 });
 
 const projectRoot = path.resolve(__dirname, '../');
 
 const webpackConfig = merge(config, {
-    module: {
-        rules: [
-            {
-                test: /\.vue$/,
-                enforce: 'pre',
-                use: [{
-                    loader: 'eslint',
-                    options: {
-                        configFile: './.eslintrc.js'
-                    }
-                }],
-                include: projectRoot,
-                exclude: /node_modules/
-            },
-            {
-                test: /\.js$/,
-                enforce: 'pre',
-                use: [{
-                    loader: 'eslint',
-                    options: {
-                        configFile: './.eslintrc.js'
-                    }
-                }],
-                include: projectRoot,
-                exclude: /node_modules/
-            }
-        ]
-    },
-    performance: {
-        hints: false
-    },
-    // eval-source-map is faster for development
-    devtool: '#eval-source-map',
-    plugins: [
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoEmitOnErrorsPlugin(),
-        new Linter({
-            configFile: 'build/stylelintrc.config.js',
-            files: 'src/**/*.vue',
-            ignorePath: 'node_modules/**',
-            syntax: 'less'
-        }),
-        new Html({
-            filename: 'index.html',
-            template: 'index.html',
-            inject: true
-        })
+  module: {
+    rules: [
+      {
+        test: /\.vue$/,
+        enforce: 'pre',
+        use: [{
+          loader: 'eslint',
+          options: {
+            configFile: './.eslintrc.js'
+          }
+        }],
+        include: projectRoot,
+        exclude: /node_modules/
+      },
+      {
+        test: /\.js$/,
+        enforce: 'pre',
+        use: [{
+          loader: 'eslint',
+          options: {
+            configFile: './.eslintrc.js'
+          }
+        }],
+        include: projectRoot,
+        exclude: /node_modules/
+      }
     ]
+  },
+  performance: {
+    hints: false
+  },
+  // eval-source-map is faster for development
+  devtool: '#eval-source-map',
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
+    new Linter({
+      configFile: '.stylelintrc.js',
+      files: ['src/**/*.vue', 'src/**/*.less'],
+      ignorePath: 'node_modules/**',
+      syntax: 'less'
+    }),
+    new Html({
+      filename: 'index.html',
+      template: 'index.html',
+      inject: true
+    })
+  ]
 });
 
 export default {
-    ...webpackConfig
+  ...webpackConfig
 };

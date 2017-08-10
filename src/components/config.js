@@ -7,14 +7,14 @@
 import Vue from 'vue';
 
 import {
-    Button,
-    TabContainer,
-    TabContainerItem,
-    Field,
-    Picker,
-    Swipe,
-    SwipeItem,
-    popup
+  Button,
+  TabContainer,
+  TabContainerItem,
+  Field,
+  Picker,
+  Swipe,
+  SwipeItem,
+  popup
 } from 'mint-ui';
 
 // add reference

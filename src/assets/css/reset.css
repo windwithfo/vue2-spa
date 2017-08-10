@@ -4,13 +4,13 @@ dl, dt, dd, ul, ol, li, /* list elements 列表元素 */
 pre, /* text formatting elements 文本格式元素 */
 form, fieldset, legend, button, input, textarea, /* form elements 表单元素 */
 th, td /* table elements 表格元素 */ {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 /** 设置默认字体 **/
 body,
 button, input, select, textarea /* for ie */ {
-    font: 12px/1.5 tahoma, arial, \5b8b\4f53, sans-serif;
+  font: 12px/1.5 tahoma, arial, \5b8b\4f53, sans-serif;
 }
 h1, h2, h3, h4, h5, h6 { font-size: 100%; }
 address, cite, dfn, em, var { font-style: normal; } /* 将斜体扶正 */

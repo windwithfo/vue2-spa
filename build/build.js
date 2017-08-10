@@ -24,24 +24,24 @@ mkdir('-p', assetsPath);
 cp('-R', 'static/*', assetsPath);
 
 webpack(Config, function (err, stats) {
-    spinner.stop();
-    if (err) {
-        throw err;
+  spinner.stop();
+  if (err) {
+    throw err;
+  }
+  process.stdout.write(stats.toString({
+    colors: true,
+    modules: false,
+    children: false,
+    chunks: false,
+    chunkModules: false
+  }) + '\n');
+  let cmd = 'zip -r dist.zip dist';
+  scp.exec(cmd, function (data) {
+    if (!data) {
+      console.log('zip sucess');
     }
-    process.stdout.write(stats.toString({
-        colors: true,
-        modules: false,
-        children: false,
-        chunks: false,
-        chunkModules: false
-    }) + '\n');
-    let cmd = 'zip -r dist.zip dist';
-    scp.exec(cmd, function (data) {
-        if (!data) {
-            console.log('zip sucess');
-        }
-        else {
-            console.log(data);
-        }
-    });
+    else {
+      console.log(data);
+    }
+  });
 });
