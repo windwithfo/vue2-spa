@@ -10,12 +10,41 @@
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
         <meta name="format-detection" content="telephone=no">
         <meta name="format-detection" content="email=no">
+        <script>
+            if (navigator.serviceWorker) {
+              navigator.serviceWorker.register('worker.js').then(function(registration) {
+                console.log('service worker 注册成功');
+                if (navigator.serviceWorker.controller) {
+                  navigator.serviceWorker.controller.postMessage({ title: 'Send message from client' });
+                }
+                // setInterval(function() {
+                //   console.log('try update');
+                //   registration.update();
+                // }, 10000);
+              }).catch(function(err) {
+                console.log('servcie worker 注册失败')
+              });
+              navigator.serviceWorker.addEventListener('message', function (event) {
+                console.log('from worker ' + event.data);
+              });
+            }
+
+            // function onMessage(e) {
+            //   // 消息来源安全验证
+            //   if (e.origin !="http://localhost") {
+            //     return false;
+            //   }
+            //   // 消息处理...
+            //   console.log(e.data);
+            // }
+            // window.addEventListener('message', onMessage, false);
+        </script>
     </head>
     <body style="min-height: 100%;">
         <div id="app" style="min-height: 100%;">
         </div>
         <!-- built files will be auto injected -->
         <!-- 调用微信调用JS接口 -->
-        <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+        <script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     </body>
 </html>

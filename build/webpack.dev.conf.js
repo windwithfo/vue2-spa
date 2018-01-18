@@ -64,6 +64,9 @@ const webpackConfig = merge(config, {
       filename: 'index.html',
       template: 'index.html',
       inject: true
+    }),
+    new webpack.DefinePlugin({
+      __DEV__: false
     })
   ]
 });
