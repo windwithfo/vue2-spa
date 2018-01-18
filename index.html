@@ -12,7 +12,7 @@
         <meta name="format-detection" content="email=no">
         <script>
             if (navigator.serviceWorker) {
-              navigator.serviceWorker.register('worker.js').then(function(registration) {
+              navigator.serviceWorker.register('serviceWorker.js').then(function(registration) {
                 console.log('service worker 注册成功');
                 if (navigator.serviceWorker.controller) {
                   navigator.serviceWorker.controller.postMessage({ title: 'Send message from client' });
@@ -28,6 +28,19 @@
                 console.log('from worker ' + event.data);
               });
             }
+
+            var worker = new Worker('worker.js');
+            worker.postMessage({ name: 'monkey' });
+            //接收消息事件
+            worker.onmessage = function(event) {
+              console.log(event.data);
+            };
+            //错误信息事件
+            worker.onerror = function(e) {
+              console.log('erro: ' + e.message);
+              //终止线程
+              worker.terminate();
+            };
 
             // function onMessage(e) {
             //   // 消息来源安全验证
