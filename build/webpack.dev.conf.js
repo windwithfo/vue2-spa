@@ -3,12 +3,16 @@
  * @author dongkunshan
  */
 
- import path    from 'path';
- import webpack from 'webpack';
- import merge   from 'webpack-merge';
- import config  from './webpack.base.conf';
- import Html    from 'html-webpack-plugin';
- import Linter  from 'stylelint-webpack-plugin';
+import path           from 'path';
+import Chalk          from 'chalk';
+import webpack        from 'webpack';
+import merge          from 'webpack-merge';
+import config         from './webpack.base.conf';
+import Html           from 'html-webpack-plugin';
+import Linter         from 'stylelint-webpack-plugin';
+import ProgressBar    from 'progress-bar-webpack-plugin';
+import FriendlyErrors from 'friendly-errors-webpack-plugin';
+import BundleAnalyzer from 'webpack-bundle-analyzer/lib/BundleAnalyzerPlugin';
 
 // add hot-reload related code to entry chunks
 Object.keys(config.entry).forEach(function (name) {
@@ -18,6 +22,7 @@ Object.keys(config.entry).forEach(function (name) {
 const projectRoot = path.resolve(__dirname, '../');
 
 const webpackConfig = merge(config, {
+  mode: 'development',
   module: {
     rules: [
       {
@@ -65,12 +70,17 @@ const webpackConfig = merge(config, {
       template: 'index.html',
       inject: true
     }),
-    new webpack.DefinePlugin({
-      __DEV__: false
+    new FriendlyErrors(),
+    new ProgressBar({
+      complete: Chalk.green('█'),
+      incomplete: Chalk.white('█'),
+      format: '  :bar ' + Chalk.green.bold(':percent') + ' :msg',
+      clear: false
+    }),
+    new BundleAnalyzer({
+      analyzerMode: 'static'
     })
   ]
 });
 
-export default {
-  ...webpackConfig
-};
+export default webpackConfig;

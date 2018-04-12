@@ -11,26 +11,26 @@
         <meta name="format-detection" content="telephone=no">
         <meta name="format-detection" content="email=no">
         <script>
-            if (navigator.serviceWorker) {
-              navigator.serviceWorker.register('serviceWorker.js').then(function(registration) {
-                console.log('service worker 注册成功');
-                if (navigator.serviceWorker.controller) {
-                  navigator.serviceWorker.controller.postMessage({ title: 'Send message from client' });
-                }
-                // setInterval(function() {
-                //   console.log('try update');
-                //   registration.update();
-                // }, 10000);
-              }).catch(function(err) {
-                console.log('servcie worker 注册失败')
-              });
-              navigator.serviceWorker.addEventListener('message', function (event) {
-                console.log('from worker ' + event.data);
-              });
-            }
+            // if (navigator.serviceWorker) {
+            //   navigator.serviceWorker.register('serviceWorker.js').then(function(registration) {
+            //     console.log('service worker 注册成功');
+            //     if (navigator.serviceWorker.controller) {
+            //       navigator.serviceWorker.controller.postMessage({ title: 'Send message from client' });
+            //     }
+            //     // setInterval(function() {
+            //     //   console.log('try update');
+            //     //   registration.update();
+            //     // }, 10000);
+            //   }).catch(function(err) {
+            //     console.log('servcie worker 注册失败')
+            //   });
+            //   navigator.serviceWorker.addEventListener('message', function (event) {
+            //     console.log('from worker ' + event.data);
+            //   });
+            // }
 
             var worker = new Worker('worker.js');
-            worker.postMessage({ name: 'monkey' });
+            // worker.postMessage({ name: 'monkey' });
             //接收消息事件
             worker.onmessage = function(event) {
               console.log(event.data);

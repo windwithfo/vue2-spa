@@ -4,26 +4,10 @@
  */
 
 import path    from 'path';
-import webpack from 'webpack';
 import config  from './config';
 import postcss from 'postcss-cssnext';
-import Extract from 'extract-text-webpack-plugin';
 
 const projectRoot = path.resolve(__dirname, '../');
-
-let plugins = [];
-
-plugins.push(new webpack.optimize.CommonsChunkPlugin({
-  names: ['vue', 'echarts', 'manifest']
-}));
-
-let extractStyl = new Extract({
-  filename: '[name].[contenthash].css',
-  disable: false,
-  allChunks: true
-});
-
-plugins.push(extractStyl);
 
 function assetsPath(_path) {
   let assetsSubDirectory = config.build.assetsSubDirectory;
@@ -32,9 +16,18 @@ function assetsPath(_path) {
 
 let webpackConfig = {
   entry: {
-    vue: 'vue',
-    echarts: 'ECharts',
     app: './src/main.js'
+  },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          name: 'commons',
+          chunks: 'initial',
+          minChunks: 2
+        }
+      }
+    }
   },
   output: {
     path: config.build.assetsRoot,
@@ -76,28 +69,20 @@ let webpackConfig = {
       },
       {
         test: /\.css$/,
-        loader: extractStyl.extract({
-          fallback: 'style',
-          use: [
-            {
-              loader: 'css'
-            }
-          ]
-        })
+        use: {
+          loader: 'css'
+        }
       },
       {
         test: /\.less$/,
-        loader: extractStyl.extract({
-          fallback: 'vue-style',
-          use: [
-            {
-              loader: 'css'
-            },
-            {
-              loader: 'less'
-            }
-          ]
-        })
+        use: [
+          {
+            loader: 'css'
+          },
+          {
+            loader: 'less'
+          }
+        ]
       },
       {
         test: /\.js$/,
@@ -140,10 +125,7 @@ let webpackConfig = {
         }]
       }
     ]
-  },
-  plugins
+  }
 };
 
-export default {
-  ...webpackConfig
-};
+export default webpackConfig;

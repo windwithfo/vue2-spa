@@ -14,7 +14,7 @@ import store       from './vuex/store';
 import router      from './router/router';
 
 // global css
-System.import('./assets/css/common.less');
+import('./assets/css/common.less');
 
 Vue.config.debug = false;
 

@@ -18,7 +18,7 @@ const assetsPath = path.join(config.build.assetsRoot, config.build.assetsSubDire
 
 spinner.start();
 
-rm('dist.zip');
+// rm('dist.zip');
 rm('-rf', config.build.assetsRoot);
 mkdir('-p', assetsPath);
 cp('-R', 'static/*', assetsPath);
@@ -35,13 +35,13 @@ webpack(Config, function (err, stats) {
     chunks: false,
     chunkModules: false
   }) + '\n');
-  let cmd = 'zip -r dist.zip dist';
-  scp.exec(cmd, function (data) {
-    if (!data) {
-      console.log('zip sucess');
-    }
-    else {
-      console.log(data);
-    }
-  });
+  // let cmd = 'zip -r dist.zip dist';
+  // scp.exec(cmd, function (data) {
+  //   if (!data) {
+  //     console.log('zip sucess');
+  //   }
+  //   else {
+  //     console.log(data);
+  //   }
+  // });
 });

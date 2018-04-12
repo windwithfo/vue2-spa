@@ -18,7 +18,7 @@ const actions = {
   async getData({ commit }, num) {
     console.log(num);
     const ret = await fetch('/static/mock/errorCode.json')
-    .then((response) => response.json());
+      .then((response) => response.json());
     commit('setCount', ret.count);
   }
 };

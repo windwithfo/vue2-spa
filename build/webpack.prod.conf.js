@@ -3,13 +3,14 @@
  * @author dongkunshan
  */
 
-import path     from 'path';
-import webpack  from 'webpack';
-import config   from './config';
-import merge    from 'webpack-merge';
-import base     from './webpack.base.conf';
-import Html     from 'html-webpack-plugin';
-import Compress from 'compression-webpack-plugin';
+import path           from 'path';
+import webpack        from 'webpack';
+import config         from './config';
+import merge          from 'webpack-merge';
+import base           from './webpack.base.conf';
+import Html           from 'html-webpack-plugin';
+import Compress       from 'compression-webpack-plugin';
+import BundleAnalyzer from 'webpack-bundle-analyzer/lib/BundleAnalyzerPlugin';
 
 const useMap = config.build.sourceMap;
 
@@ -19,6 +20,7 @@ function assetsPath(_path) {
 }
 
 let webpackConfig = merge(base, {
+  mode: 'production',
   devtool: useMap ? '#source-map' : false,
   output: {
     path: config.build.assetsRoot,
@@ -27,9 +29,6 @@ let webpackConfig = merge(base, {
     chunkFilename: assetsPath('[id].[chunkhash].js')
   },
   plugins: [
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: useMap
-    }),
     new Html({
       filename: config.build.index,
       template: 'index.html',
@@ -40,7 +39,10 @@ let webpackConfig = merge(base, {
         removeAttributeQuotes: true
       },
       chunksSortMode: 'dependency'
-    })
+    }),
+    // new BundleAnalyzer({
+    //   analyzerMode: 'static'
+    // })
   ]
 });
 
@@ -56,6 +58,4 @@ if (config.build.productionGzip) {
   );
 }
 
-export default {
-  ...webpackConfig
-};
+export default webpackConfig;

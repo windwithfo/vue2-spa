@@ -3,3 +3,4 @@ onmessage = function(event){
   console.log(event.data);
   postMessage(event.data.name);
 };
+window.postMessage('reload');
