@@ -17,7 +17,7 @@ const mutations = {
 const actions = {
   async getData({ commit }, num) {
     console.log(num);
-    const ret = await fetch('/static/mock/errorCode.json')
+    const ret = await fetch('/mock/errorCode.json')
       .then((response) => response.json());
     commit('setCount', ret.count);
   }

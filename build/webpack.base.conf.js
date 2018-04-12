@@ -6,6 +6,7 @@
 import path    from 'path';
 import config  from './config';
 import postcss from 'postcss-cssnext';
+import Extract from 'mini-css-extract-plugin';
 
 const projectRoot = path.resolve(__dirname, '../');
 
@@ -20,11 +21,31 @@ let webpackConfig = {
   },
   optimization: {
     splitChunks: {
+      chunks: 'all',
       cacheGroups: {
-        commons: {
-          name: 'commons',
-          chunks: 'initial',
-          minChunks: 2
+        default: {
+          minChunks: 1,
+          priority: -20,
+          reuseExistingChunk: true,
+        },
+        vendor1: {
+          name: 'vue',
+          test: /node_modules\/vue/,
+          priority: 10,
+          enforce: true
+        },
+        vendor2: {
+          name: 'mint',
+          test: /node_modules\/mint-ui/,
+          priority: 10,
+          enforce: true
+        },
+        style: {            
+          name: 'style',
+          test: /\.css/,
+          chunks: 'all',
+          minChunks: 1,
+          enforce: true
         }
       }
     }
@@ -69,20 +90,11 @@ let webpackConfig = {
       },
       {
         test: /\.css$/,
-        use: {
-          loader: 'css'
-        }
+        use: [Extract.loader, 'css']
       },
       {
         test: /\.less$/,
-        use: [
-          {
-            loader: 'css'
-          },
-          {
-            loader: 'less'
-          }
-        ]
+        use: [Extract.loader, 'css', 'less']
       },
       {
         test: /\.js$/,

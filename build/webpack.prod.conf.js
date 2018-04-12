@@ -9,7 +9,10 @@ import config         from './config';
 import merge          from 'webpack-merge';
 import base           from './webpack.base.conf';
 import Html           from 'html-webpack-plugin';
+import UglifyJs       from 'uglifyjs-webpack-plugin';
+import Extract        from 'mini-css-extract-plugin';
 import Compress       from 'compression-webpack-plugin';
+import CSSAssets      from 'optimize-css-assets-webpack-plugin';
 import BundleAnalyzer from 'webpack-bundle-analyzer/lib/BundleAnalyzerPlugin';
 
 const useMap = config.build.sourceMap;
@@ -21,12 +24,25 @@ function assetsPath(_path) {
 
 let webpackConfig = merge(base, {
   mode: 'production',
+  optimization: {
+    minimizer: [
+      new UglifyJs({
+        cache: true,
+        parallel: true,
+        sourceMap: true 
+      }),
+      new CSSAssets({})
+    ]
+  },
   devtool: useMap ? '#source-map' : false,
   output: {
     path: config.build.assetsRoot,
     publicPath: '',
     filename: assetsPath('[name].[chunkhash].js'),
     chunkFilename: assetsPath('[id].[chunkhash].js')
+  },
+  performance: {
+    hints: false
   },
   plugins: [
     new Html({
@@ -39,6 +55,10 @@ let webpackConfig = merge(base, {
         removeAttributeQuotes: true
       },
       chunksSortMode: 'dependency'
+    }),
+    new Extract({
+      filename: 'css/app.[name].css',
+      chunkFilename: 'css/app.[contenthash:12].css'
     }),
     // new BundleAnalyzer({
     //   analyzerMode: 'static'

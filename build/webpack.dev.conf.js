@@ -9,6 +9,7 @@ import webpack        from 'webpack';
 import merge          from 'webpack-merge';
 import config         from './webpack.base.conf';
 import Html           from 'html-webpack-plugin';
+import Extract        from 'mini-css-extract-plugin';
 import Linter         from 'stylelint-webpack-plugin';
 import ProgressBar    from 'progress-bar-webpack-plugin';
 import FriendlyErrors from 'friendly-errors-webpack-plugin';
@@ -77,9 +78,13 @@ const webpackConfig = merge(config, {
       format: '  :bar ' + Chalk.green.bold(':percent') + ' :msg',
       clear: false
     }),
-    new BundleAnalyzer({
-      analyzerMode: 'static'
-    })
+    new Extract({
+      filename: '[name].css',
+      chunkFilename: '[id].css'
+    }),
+    // new BundleAnalyzer({
+    //   analyzerMode: 'static'
+    // })
   ]
 });
 

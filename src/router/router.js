@@ -8,8 +8,8 @@ import VueRouter from 'vue-router';
 
 // components
 const Demo = (resolve) => {
-  require.ensure(['../pages/demo/Demo'], () => {
-    resolve(require('../pages/demo/Demo'));
+  require.ensure(['../pages/Demo'], () => {
+    resolve(require('../pages/Demo'));
   });
 };
 
@@ -24,7 +24,8 @@ const routes = [
 ];
 
 const router = new VueRouter({
-  routes
+  routes,
+  mode: 'history'
 });
 
 export default router;

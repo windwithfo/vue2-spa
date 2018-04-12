@@ -3,9 +3,9 @@
  * @author windwithfo(windwithfo@yeah.net)
  */
 
-// components
 import Vue from 'vue';
 
+// components
 import {
   Button,
   TabContainer,
