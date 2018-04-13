@@ -29,7 +29,7 @@ let webpackConfig = merge(base, {
       new UglifyJs({
         cache: true,
         parallel: true,
-        sourceMap: true 
+        sourceMap: true
       }),
       new CSSAssets({})
     ]
