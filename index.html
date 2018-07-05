@@ -29,18 +29,18 @@
             //   });
             // }
 
-            var worker = new Worker('worker.js');
-            // worker.postMessage({ name: 'monkey' });
-            //接收消息事件
-            worker.onmessage = function(event) {
-              console.log(event.data);
-            };
-            //错误信息事件
-            worker.onerror = function(e) {
-              console.log('error: ' + e.message);
-              //终止线程
-              worker.terminate();
-            };
+            // var worker = new Worker('worker.js');
+            // // worker.postMessage({ name: 'monkey' });
+            // //接收消息事件
+            // worker.onmessage = function(event) {
+            //   console.log(event.data);
+            // };
+            // //错误信息事件
+            // worker.onerror = function(e) {
+            //   console.log('error: ' + e.message);
+            //   //终止线程
+            //   worker.terminate();
+            // };
 
             // function onMessage(e) {
             //   // 消息来源安全验证
@@ -56,6 +56,7 @@
     <body style="min-height: 100%;">
         <div id="app" style="min-height: 100%;">
         </div>
+        <script src="static/dll.vendor.js"></script>
         <!-- built files will be auto injected -->
         <!-- 调用微信调用JS接口 -->
         <script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>

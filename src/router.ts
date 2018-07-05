@@ -7,17 +7,13 @@ import Vue       from 'vue';
 import VueRouter from 'vue-router';
 
 // components
-const Demo = (resolve) => {
-  require.ensure(['../pages/Demo'], () => {
-    resolve(require('../pages/Demo'));
-  });
-};
+const Demo = () => import('./views/Demo.vue');
 
 Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/demo/',
+    path: '/',
     name: 'demo',
     component: Demo
   }
@@ -25,7 +21,7 @@ const routes = [
 
 const router = new VueRouter({
   routes,
-  mode: 'history'
+  mode: 'hash'
 });
 
 export default router;

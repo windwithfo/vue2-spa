@@ -27,7 +27,7 @@ module.exports = {
       'SwitchCase': 1
     }],
     // 语句强制分号结尾
-    'semi': [1, 'always'],
+    'semi': 0,
     // 分号前后空格
     'semi-spacing': [1, {
       'before': false,
@@ -38,7 +38,7 @@ module.exports = {
     // 逗号风格，换行时在行首还是行尾
     'comma-style': [1, 'last'],
     // 对象字面量项尾不能有逗号
-    'comma-dangle': [1, 'never'],
+    'comma-dangle': 0,
     // 必须使用全等
     'eqeqeq': 1,
     // 必须使用 if(){} 中的{}

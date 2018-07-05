@@ -3,26 +3,24 @@ vue2-spa
 a project with vue2 and webpack2 for single pages
 ***
 
-Install with:
+## Usage Example
+===
 
-    npm install vue2-spa
-
-##Usage Example
-
-Init
+Install dependencies
 
     npm install
 
-Run Server
+Init project (build dll)
 
-    npm start or npm run dev
+    npm run init
 
-Build code
+Run develop
 
-    npm run build
+    npm start
 
-Pages config
-`src/entry.js`
+Build project
+
+    npm run pub
 
 Proxy config
 `build/config.js`
